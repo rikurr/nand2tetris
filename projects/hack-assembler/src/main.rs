@@ -16,13 +16,11 @@ fn main() -> std::io::Result<()> {
     let mut asm_command = String::new();
     buf_reader.read_to_string(&mut asm_command)?;
 
-    // Parser Symbol
-
-    // Parser
-
     let symbol_table = SymbolTable::new();
+    // first_parse
     let first_parse = parser::first_parse(&asm_command, symbol_table);
-    let parse = parser::parse(&asm_command, first_parse);
+    // second_parse
+    let parse = parser::second_parse(&asm_command, first_parse);
 
     // Code Generate
     let machine_code = code::code_generate(parse.0, parse.1.symbols);
@@ -66,7 +64,7 @@ M=D
 
         let symbol_table = SymbolTable::new();
         let first_parse = parser::first_parse(&asm_command, symbol_table);
-        let parse = parser::parse(&asm_command, first_parse);
+        let parse = parser::second_parse(&asm_command, first_parse);
 
         // Code Generate
         let machine_code = code::code_generate(parse.0, parse.1.symbols);
@@ -126,7 +124,7 @@ M=D
 
         let symbol_table = SymbolTable::new();
         let first_parse = parser::first_parse(&asm_command, symbol_table);
-        let parse = parser::parse(&asm_command, first_parse);
+        let parse = parser::second_parse(&asm_command, first_parse);
 
         // Code Generate
         let machine_code = code::code_generate(parse.0, parse.1.symbols);

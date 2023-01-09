@@ -1,7 +1,10 @@
 use crate::command::{ACommand, CCommand, Command, Comp, Dest, Jump};
 use crate::symbol_table::SymbolTable;
 
-pub fn parse(asm_command: &str, mut symbol_table: SymbolTable) -> (Vec<Command>, SymbolTable) {
+pub fn second_parse(
+    asm_command: &str,
+    mut symbol_table: SymbolTable,
+) -> (Vec<Command>, SymbolTable) {
     let parser = asm_command
         .split('\n')
         .filter(|line| {
